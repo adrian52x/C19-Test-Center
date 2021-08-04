@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+
+<head th:include="fragments/fragments.html :: head" />
+
+<body>
+<div th:replace="~{fragments/fragments.html :: navbar}"></div>
+
+
+
+<div class="container">
+
+  <div class="row col-lg-8 col-lg-offset-4" style="color:black; margin-top: 100px; margin-left: -100px; padding:20px;border:solid 1px #000000;">
+
+
+
+
+    <h2>Your appointment <a th:href="@{/profile}" type="submit"
+                            class="text-uppercase btn btn-primary shadowed w-50">Back</a> </h2>
+    <table class="table table-striped">
+      <tr>
+        <th>Id</th>
+        <th>Test Center</th>
+        <th>CPR</th>
+        <th>TIME</th>
+        <th>DATE</th>
+        <th>###</th>
+        <th>Actions</th>
+
+      </tr>
+      <tr th:each="appointment: ${userCpr}">
+        <td th:text="${appointment.getApptId()}"></td>
+       <!-- <td th:text="${appointment.getTestCenterId()}"></td>-->
+        <td th:text="${iTestCenterService.findTestCenterById(appointment.getTestCenterId()).getName()}"></td>
+        <td th:text="${appointment.getCprOfUser()}"></td>
+        <td th:text="${appointment.getTime()}"></td>
+        <td th:text="${appointment.getDate()}"></td>
+
+        <td><a class="btn btn-primary"
+               th:href="@{/updateAppointment/{apptID}(apptID=${appointment.getApptId()})}">Update</a> </td>
+
+        <td><a class="btn btn-warning"
+               th:href="@{/deleteMyAppointment/{apptID}(apptID=${appointment.getApptId()})}">Cancel</a></td>
+
+      </tr>
+    </table>
+
+
+  </div>
+</div>
+
+
+
+<!--<div class="container">
+
+  <h2>Search for your appointment</h2>
+  <form  th:action="@{/myappointments}" >
+    <input type="text" th:name="userCpr" id="userCpr"/>
+    <input type="submit" value="Search"/>
+
+    <h2>Students List</h2>
+    <table class="table table-striped">
+      <tr>
+        <th>Id</th>
+        <th>Test Center</th>
+        <th>CPR</th>
+        <th>TIME</th>
+        <th>DATE</th>
+
+      </tr>
+      <tr th:each="appointment: ${userCpr}">
+        <td th:text="${appointment.getApptId()}"></td>
+        <td th:text="${appointment.getTestCenterId()}"></td>
+        <td th:text="${appointment.getCprOfUser()}"></td>
+        <td th:text="${appointment.getTime()}"></td>
+        <td th:text="${appointment.getDate()}"></td>
+      </tr>
+    </table>
+
+  </form>
+</div>-->
+
+
+
+
+<div th:replace="~{fragments/fragments.html :: footer}"></div>
+</body>
+</html>

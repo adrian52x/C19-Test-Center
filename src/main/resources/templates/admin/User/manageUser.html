@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:include="fragments/fragments.html :: head" />
+
+<style>
+
+    #showTables {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 85%;
+        color: black;
+    }
+
+    #showTables td{
+        text-align: center;
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #showTables tr:nth-child(even){background-color: #979c9c;}
+    #showTables tr:nth-child(odd) {  background-color: #979c9c; }
+
+
+
+    #showTables tr:hover {background-color: #ddd;}
+
+    #showTables th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #97bacb;
+        color: black;
+    }
+</style>
+
+<body>
+<div th:replace="~{fragments/fragments.html :: navbar}"></div>
+
+<div class="container">
+    <h1> Manage Users <a th:href="@{/admin}" type="submit" class="text-uppercase btn btn-primary login__button shadowed w-50">Back</a> </h1>
+
+    <!--SEARCH BAR -->
+    <form style="color: black" th:action="@{/admin/manageUser}" method="get">
+        <input  id="txtSearch" type="text" placeholder="Search by CPR" th:name="keyword">
+        <button type="submit">Search</button>
+    </form><br /><br />
+
+    <!--ADD NEW USER BUTTON-->
+    <a th:href = "@{/showNewUserForm}" class="btn btn-primary btn-sm mb-3">Add User</a>
+
+    <!--Download User list-->
+    <a th:href = "@{/admin/export/users}" class="download"><i class="fa fa-download"></i> Download User list</a>
+
+
+
+
+<table id="showTables">
+    <tr>
+        <th>CPR</th>
+        <th>Firstname</th>
+        <th>Surname</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th>DateOfBirth</th>
+        <th>Actions</th>
+
+    </tr>
+    <tr th:each="user :  ${myUsers}">
+        <td th:text="${user.getCPR()}"></td>
+        <td th:text="${user.getFirstName()}"></td>
+        <td th:text="${user.getSurname()}"></td>
+        <!-- <td th:text="${user.getAddressId()}"></td>-->
+        <td th:text="${iAddressService.findAddressById(user.getAddressId()).toString()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td th:text="${user.getDateOfBirth()}"></td>
+
+        <td><a class="btn btn-primary"
+               th:href="@{/updateUser/{cpr}(cpr=${user.getCPR()})}">Update</a> </td>
+
+        <!--<td><a class="btn btn-warning"
+               th:href="@{/deleteUser/{cpr}(cpr=${user.getCPR()})}">Remove</a></td>-->
+    </tr>
+</table>
+
+
+
+</div>
+
+
+<br />
+<br />
+<br />
+<div th:replace="~{fragments/fragments.html :: footer}"></div>
+</body>
+</html>

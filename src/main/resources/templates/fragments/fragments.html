@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- Fragment #1 : Header files contains css and js references -->
+<head th:fragment="head">
+  <meta charset="utf-8">
+  <title th:text="${pageTitle}">Template title</title>
+  <meta name="description" th:content="${pageTitle}">
+  <meta name="author" content="Group name">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&display=swap" rel="stylesheet">
+  <script src="/js/script.js"></script>
+  <script th:src="@{/webjars/bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js}"></script>
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.0.0-beta2/css/bootstrap.min.css}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+
+
+
+
+<!-- Fragment #2 : Navbar contains nav links -->
+<div th:fragment="navbar">
+    <div class="topnav">
+
+        <a th:href="@{/}">Home</a>
+        <a th:href="@{/booking}">Book a test</a>
+        <a th:href="@{/admin}" th:if="${#authorization.expression('hasAuthority(''ADMIN'')') or #authorization.expression('hasAuthority(''SECRETARY'')')}" >Management</a>
+        <a  th:href="@{/profile}" sec:authorize="isAuthenticated()">Profile</a>
+
+       <!-- <h4 style="margin-right: 100px" sec:authorize="isAuthenticated()">
+            <p>Logged user: <span sec:authentication="name"></span></p>
+        </h4>-->
+
+
+
+     <div class="topnav-right">
+         <!--LOGGED IN USER DETAILS-->
+         <div class="roleadmin">
+             <h4 sec:authorize="isAuthenticated()">
+                 <i th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">ADMIN</i>
+             </h4>
+         </div>
+         <div class="rolesec">
+             <h4 sec:authorize="isAuthenticated()">
+                 <i th:if="${#authorization.expression('hasAuthority(''SECRETARY'')')}">SECRETARY</i>
+             </h4>
+         </div>
+
+
+         <div class="fixed">
+            <h4 sec:authorize="isAuthenticated()">
+                <p>Logged user: <span sec:authentication="name"></span></p>
+            </h4>
+        </div>
+
+
+
+
+
+        <!-- LOGIN BUTTON-->
+        <form th:action="@{/login}"  sec:authorize="isAnonymous()">
+            <button type="submit" class="btn btn-lg btn-primary"
+                    style="border:solid 2px #000000; margin-top: 2px">Login</button>
+        </form>
+
+        <!-- LOGOUT BUTTON-->
+        <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+            <button type="submit" class="btn btn-lg btn-primary"
+                    style="margin-top: 2px;
+                background-color: #d90c0c;
+                border:solid 2px #000000;">Logout</button>
+        </form>
+     </div>
+
+
+    </div>
+</div>
+
+   <!-- <div class="fixed">
+
+        <h4 sec:authorize="isAuthenticated()">
+            <p>Logged user: <span sec:authentication="name"></span></p>
+        </h4>
+    </div>-->
+
+
+
+</body>
+
+
+<footer th:fragment="footer">
+    <p class="text__color-blue"> © <span itemprop="copyrightYear">2021</span>
+        Developed by:&nbsp;
+        <a class="text__color-pink" title="Group name" href="#"># 3 people #</a>
+    </p>
+</footer>
+
+</html>

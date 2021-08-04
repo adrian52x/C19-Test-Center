@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:include="fragments/fragments.html :: head" />
+
+<body>
+<div th:replace="~{fragments/fragments.html :: navbar}"></div>
+
+
+<div class="container">
+
+  <div class="row col-lg-8 col-lg-offset-4" style="color:black; margin-top: 100px; margin-left: -100px; padding:20px;border:solid 1px #000000;">
+
+  <form  th:action="@{/myappointments}" method="post">
+      <h2>Search for your appointment</h2>
+      <div class="form-group" >
+        <label for="cprOfUser" style="color: black">CPR:  <span sec:authentication="name"></span></label>
+        <input id="cprOfUser" type="text" th:name="userCpr" placeholder="Confirm CPR"/>
+        <input type="submit" value="Search"/>
+      </div>
+  </form>
+
+    <br />
+    <br />
+
+    <form  th:action="@{/mydetails}" method="post" >
+      <h2>Display your details</h2>
+        <div class="form-group" >
+          <label for="detailsOfUser" style="color: black">CPR:  <span sec:authentication="name"></span></label>
+          <input id="detailsOfUser" type="text" th:name="userCprDetails" placeholder="Confirm CPR"/>
+          <input type="submit" value="Search"/>
+        </div>
+    </form>
+
+
+  </div>
+</div>
+
+
+<!--<div class="container">
+  <div class="row col-lg-8 col-lg-offset-4" style="margin-top: 100px; margin-left: -100px; padding:20px;border:solid 1px #000000;">
+
+    <form class="form-appointment" th:action="@{/profile}" method="POST">
+      <h3 class="form-appointment-heading" style="color: black" th:text="appts">Your appointments</h3>
+      <br />
+
+
+      <div class="form-group" >
+        <label for="cprOfUser" style="color: black">CPR:  <span sec:authentication="name"></span></label>
+        <input type="text" id="cprOfUser" name="cpr" placeholder="Confirm CPR" class="form-control" />
+
+      </div>
+
+
+      <button class="btn btn-lg btn-primary" name="Submit" value="submit" type="Submit"  style="margin-right:10px;">Search</button>
+    </form>
+  </div>
+</div>-->
+
+
+<div th:replace="~{fragments/fragments.html :: footer}"></div>
+</body>
+</html>

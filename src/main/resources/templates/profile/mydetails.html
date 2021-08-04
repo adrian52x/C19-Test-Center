@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
+
+<head th:include="fragments/fragments.html :: head" />
+
+<body>
+<div th:replace="~{fragments/fragments.html :: navbar}"></div>
+
+
+
+<div class="container">
+
+  <div class="row col-lg-8 col-lg-offset-4" style="color:black; margin-top: 100px; margin-left: -100px; padding:20px;border:solid 1px #000000;">
+
+
+    <h2>Your Details  <a th:href="@{/profile}" type="submit"
+                         class="text-uppercase btn btn-primary shadowed w-50">Back</a> </h2>
+    <table class="table table-striped">
+      <tr>
+        <th>CPR</th>
+        <th>Firstname</th>
+        <th>Surname</th>
+        <th>Address ID</th>
+        <th>Email</th>
+        <th>Date of birth</th>
+
+      </tr>
+      <tr th:each="user: ${userCprDetails}">
+        <td th:text="${user.getCPR()}"></td>
+        <td th:text="${user.getFirstName()}"></td>
+        <td th:text="${user.getSurname()}"></td>
+        <!--<td th:text="${user.getAddressId()}"></td>-->
+        <td th:text="${iAddressService.findAddressById(user.getAddressId()).toString()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td th:text="${user.getDateOfBirth()}"></td>
+      </tr>
+    </table>
+
+
+  </div>
+</div>
+
+
+
+
+
+
+<div th:replace="~{fragments/fragments.html :: footer}"></div>
+</body>
+</html>

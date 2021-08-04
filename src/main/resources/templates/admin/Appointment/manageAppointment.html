@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:include="fragments/fragments.html :: head" />
+
+<style>
+    /*TABLES*/
+
+    #showTables {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 75%;
+        color: black;
+
+    }
+
+    #showTables td {
+        text-align: center;
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #showTables tr:nth-child(even){background-color: #979c9c;}
+    #showTables tr:nth-child(odd) {  background-color: #979c9c; }
+
+
+
+    #showTables tr:hover {background-color: #ddd;}
+
+    #showTables th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #97bacb;
+        color: black;
+    }
+</style>
+
+<body>
+<div th:replace="~{fragments/fragments.html :: navbar}"></div>
+
+
+<div class="container">
+    <h1> Manage Appointments <a th:href="@{/admin}" type="submit" class="text-uppercase btn btn-primary login__button shadowed w-50">Back</a> </h1>
+
+    <form style="color: black" th:action="@{/admin/manageAppointment}" method="get">
+        <input  id="apptSearch" type="text" placeholder="Search by CPR" th:name="keyword">
+        <button type="submit">Search</button>
+    </form><br />
+
+    <!--Download Appointment list-->
+    <a th:href = "@{/admin/export/appointments}" class="download"><i class="fa fa-download"></i> Download Appointment list</a>
+
+
+    <table id="showTables">
+        <tr>
+            <th>ID</th>
+            <th>Test Center </th>
+            <th>CPR</th>
+            <th>Time</th>
+            <th>Date</th>
+            <th>###</th>
+            <th>Actions</th>
+
+
+      <!--  <tr th:if="${myAppointments.empty}">
+            <td colspan="2"> No Appointemnts  yet </td>
+        </tr>-->
+
+
+        <tr th:each="appointment : ${myAppointments}">
+            <td th:text="${appointment.getApptId()}"></td>
+           <!-- <td th:text="${appointment.getTestCenterId()}"></td>-->
+            <td th:text="${iTestCenterService.findTestCenterById(appointment.getTestCenterId()).getName()}"></td>
+            <td th:text="${appointment.getCprOfUser()}"></td>
+            <td th:text="${appointment.getTime()}"></td>
+            <td th:text="${appointment.getDate()}"></td>
+
+        <td><a class="btn btn-primary"
+               th:href="@{/updateAppointment/{apptID}(apptID=${appointment.getApptId()})}">Update</a> </td>
+
+        <td><a class="btn btn-warning"
+               th:href="@{/deleteAppointment/{apptID}(apptID=${appointment.getApptId()})}">Cancel</a></td>
+
+        </tr>
+    </table>
+</div>
+
+<div th:replace="~{fragments/fragments.html :: footer}"></div>
+</body>
+</html>

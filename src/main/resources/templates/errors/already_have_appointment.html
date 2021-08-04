@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+
+<head th:include="fragments/fragments.html :: head" />
+
+<body>
+<div class="page">
+  <div th:include="fragments/fragments.html :: navbar" />
+  <div class="main__page-card">
+    <h1 class="text__color-pink">You already have an appointment</h1>
+    <h2 class="text__color-gray mb-2">You can update or cancel it from your profile </h2>
+    <a th:href="@{/profile}" type="submit" class="text-uppercase btn btn-primary login__button shadowed w-50">Check profile</a>
+  </div>
+</div>
+<footer th:include="fragments/fragments.html :: footer" class="mt-5" />
+</body>
+
+</html>

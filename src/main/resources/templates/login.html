@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="fragments/fragments.html :: head" />
+
+<body style="background-color:#ededed;">
+
+<div th:replace="~{fragments/fragments.html :: navbar}"></div>
+<div class="container">
+  <div class="row col-lg-4 col-lg-offset-4" style="margin-top: 200px; margin-left: -100px; background-color:#fff;padding:20px;border:solid 1px #000000;">
+    <!-- <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" /> -->
+    <form th:action="@{/login}" method="post" class="form-signin">
+      <h3 class="form-signin-heading" style="color: black" th:text="Login"></h3>
+      <br /> <input required type="number" id="cpr" name="cpr" th:placeholder="CPR" class="form-control" /> <br />
+             <input required type="password" th:placeholder="Password" id="password" name="password" class="form-control" pattern="[a-zA-Z0-9]+" /> <br />
+
+      <div align="center" th:if="${param.error}">
+        <p style="font-size: 20px; color: #FF1C19;"> Wrong  credentials</p>
+      </div>
+      <button class="btn btn-lg btn-primary" name="Submit" value="Login" type="Submit" th:text="Login" style="margin-right:10px;"></button>
+
+    </form>
+  </div>
+</div>
+<footer th:include="fragments/fragments.html :: footer" class="mt-5" />
+</body>
+</html>

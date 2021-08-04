@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+
+<head th:include="fragments/fragments.html :: head" />
+
+<body>
+<div class="page">
+  <div th:include="fragments/fragments.html :: navbar" />
+  <div class="main__page-card">
+    <h1 class="text__color-pink">You have no appointments</h1>
+
+    <a th:href="@{/booking}" type="submit" class="text-uppercase btn btn-primary login__button shadowed w-50">Book a test</a>
+  </div>
+</div>
+<footer th:include="fragments/fragments.html :: footer" class="mt-5" />
+</body>
+
+</html>

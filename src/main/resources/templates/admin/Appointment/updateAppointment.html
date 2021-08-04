@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!--GOOD CODE-->
+
+<head th:include="fragments/fragments.html :: head" />
+
+<body>
+<div th:replace="~{fragments/fragments.html :: navbar}"></div>
+
+<div class="container">
+  <div class="row col-lg-8 col-lg-offset-4" style="margin-top: 50px; margin-left: -100px; background-color:#fff;padding:20px;border:solid 1px #000000;">
+
+    <form th:action="@{/saveAppointment/{apptID} (apptID=${updatedAppointment.getApptId()})}" th:object="${updatedAppointment}" method="POST">
+      <h3 class="form-appointment-heading" style="color: black" >Update Appointment</h3>
+      <br />
+
+
+      <input type="hidden" th:field ="*{ApptId}"/>
+      <input type="hidden" th:field ="*{CprOfUser}"/>
+
+      <!--<label style="color: black">Test Center ID: </label>
+      <input type="text" th:field ="*{TestCenterId}" placeholder="Test Center ID" class="form-control mb-4 col-4"><br />-->
+
+      <label for="testCenter" style="color: black">Test Center: </label>
+      <select required name="testCenterId" id="testCenter" class="form-control shadowed-light form-select"
+              aria-label="Test Center selector">
+        <option th:each="TestCenter : ${iTestCenterService.fetchAllCenters()}" th:text="${TestCenter.getName()}"
+                th:value="${TestCenter.getTestCenterId()}">
+        </option>
+      </select> <br />
+
+
+      <label for="time" style="color: black">Time: [09:00 - 21:00] </label>
+      <select name="time" th:field ="*{Time}" id="time" class="form-control">
+        <option value="09:00">09:00</option>
+        <option value="10:00">10:00</option>
+        <option value="11:00">11:00</option>
+        <option value="12:00">12:00</option>
+        <option value="13:00">13:00</option>
+        <option value="14:00">14:00</option>
+        <option value="15:00">15:00</option>
+        <option value="16:00">16:00</option>
+        <option value="17:00">17:00</option>
+        <option value="18:00">18:00</option>
+        <option value="19:00">19:00</option>
+        <option value="20:00">20:00</option>
+        <option value="21:00">21:00</option>
+      </select> <br />
+
+      <label style="color: black">Date: </label>
+      <input required type="date" th:field ="*{Date}" placeholder="YYYY-MM-DD " class="form-control mb-4 col-4" min="2021-06-01" max="2021-12-31"><br />
+
+      <br />
+      <button  class="btn btn-lg btn-primary" type="Submit"  style="margin-right:10px;">Update</button>
+
+    </form>
+
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+<div th:replace="~{fragments/fragments.html :: footer}"></div>
+</body>
+</html>

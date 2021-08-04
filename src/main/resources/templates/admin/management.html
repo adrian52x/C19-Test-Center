@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:include="fragments/fragments.html :: head" />
+
+
+
+
+
+<body>
+<div th:replace="~{fragments/fragments.html :: navbar}"></div>
+
+<div class="container">
+  <br />
+  <h1 style="alignment: center">Management Panel</h1>
+
+
+  <div class="btn-group btn-group-lg" role="group" aria-label="Basic example"><br />
+    <a th:href="@{admin/manageUser}" th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" ><button type="button" class="btn btn-secondary">Users</button></a>
+      <a th:href="@{admin/manageAddress}" th:if="${#authorization.expression('hasAuthority(''ADMIN'')') or #authorization.expression('hasAuthority(''SECRETARY'')')}" ><button type="button" class="btn btn-secondary ">Addresses</button></a>
+       <a th:href="@{admin/manageAppointment}" th:if="${#authorization.expression('hasAuthority(''ADMIN'')') or #authorization.expression('hasAuthority(''SECRETARY'')')}"><button type="button" class="btn btn-secondary">Appointments</button></a>
+         <a th:href="@{admin/manageTestCenter}" th:if="${#authorization.expression('hasAuthority(''ADMIN'')') or #authorization.expression('hasAuthority(''SECRETARY'')')}"><button type="button" class="btn btn-secondary">Test Centers</button></a>
+
+
+  </div>
+
+
+
+</div>
+
+<div th:replace="~{fragments/fragments.html :: footer}"></div>
+</body>
+</html>

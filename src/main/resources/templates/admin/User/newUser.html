@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+
+<head th:include="fragments/fragments.html :: head" />
+
+<body>
+<div th:replace="~{fragments/fragments.html :: navbar}"></div>
+
+<div class="container">
+  <div class="row col-lg-8 col-lg-offset-4" style="margin-top: 50px; margin-left: -100px; background-color:#fff;padding:20px;border:solid 1px #000000;">
+
+    <form th:action="@{/addUser}" th:object="${newUser}" method="POST">
+      <h3 class="form-appointment-heading" style="color: black" >Add new user</h3>
+      <br />
+
+      <label style="color: black">CPR: </label>
+      <input required type="number" maxlength="6" th:field = "*{CPR}" th:placeholder="CPR" class="form-control mb-4 col-4"><br />
+      <label style="color: black">Firstname: </label>
+      <input required type="text" th:field ="*{FirstName}" placeholder="Insert Firstname" class="form-control mb-4 col-4"><br />
+      <label style="color: black">Surnume: </label>
+      <input required type="text" th:field ="*{Surname}" placeholder="Insert Surname" class="form-control mb-4 col-4"><br />
+      <label style="color: black">Address ID: </label>
+      <input required type="text" th:field ="*{AddressId}" placeholder="Address ID" class="form-control mb-4 col-4"><br />
+      <label style="color: black">Email: </label>
+      <input type="email" th:field ="*{Email}" placeholder="Insert Email" class="form-control mb-4 col-4"><br />
+      <label style="color: black">Password: </label>
+      <input required type="password" th:field ="*{Password}" placeholder="Insert password" class="form-control mb-4 col-4"><br />
+      <label style="color: black">Birthday: </label>
+      <input required type="date" th:field ="*{DateOfBirth}" placeholder="Insert Birthday YYYY-MM-DD " class="form-control mb-4 col-4" max="2021-06-01"><br />
+
+      <br />
+      <button class="btn btn-lg btn-primary" type="Submit"  style="margin-right:10px;">Add user</button>
+
+    </form>
+
+
+
+  </div>
+</div>
+
+
+<br />
+<br />
+<br />
+<div th:replace="~{fragments/fragments.html :: footer}"></div>
+</body>
+</html>

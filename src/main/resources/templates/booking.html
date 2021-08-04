@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+
+<head th:include="fragments/fragments.html :: head" />
+
+<body>
+<div th:replace="~{fragments/fragments.html :: navbar}"></div>
+
+<div class="container">
+  <div class="row col-lg-8 col-lg-offset-4" style="margin-top: 60px; margin-left: -100px; background-color:#fff;padding:20px;border:solid 1px #000000;">
+
+     <form class="form-appointment" th:action="@{/success}" method="POST">
+                <h3 class="form-appointment-heading" style="color: black" th:text="Appointment"></h3>
+                <br />
+          <div class="form-group">
+              <label for="cprOfUser"  style="color: black">CPR:  <span sec:authentication="name"></span></label>
+              <input required type="number" maxlength="10" id="cprOfUser" name="cprOfUser" placeholder="Confirm CPR" class="form-control" />
+          </div>
+                <br />
+
+          <div class="form-group">
+              <label for="testCenter" style="color: black">Test Center: </label>
+              <select required name="testCenterId" id="testCenter" class="form-control shadowed-light form-select" aria-label="Test Center selector">
+                  <option th:each="TestCenter : ${iTestCenterService.fetchAllCenters()}" th:text="${TestCenter.getName()}" th:value="${TestCenter.getTestCenterId()}">
+                  </option>
+              </select>
+          </div>
+
+                <br />
+
+          <div class="form-group">
+              <label for="date" style="color: black">Date: </label>
+              <input required type="date" th:placeholder="YYYY-MM-DD" id="date" name="date" class="form-control" min="2021-08-20" max="2021-12-31" />
+          </div>
+
+                <br />
+
+          <div class="form-group">
+              <label for="time" style="color: black">Time: [09:00 - 21:00] </label>
+              <select name="time" id="time" class="form-control">
+                  <option value="09:00">09:00</option>
+                  <option value="10:00">10:00</option>
+                  <option value="11:00">11:00</option>
+                  <option value="12:00">12:00</option>
+                  <option value="13:00">13:00</option>
+                  <option value="14:00">14:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="16:00">16:00</option>
+                  <option value="17:00">17:00</option>
+                  <option value="18:00">18:00</option>
+                  <option value="19:00">19:00</option>
+                  <option value="20:00">20:00</option>
+                  <option value="21:00">21:00</option>
+              </select>
+          </div>
+                <br />
+
+          <button class="btn btn-lg btn-primary" name="Submit" value="submit" type="Submit"  style="margin-right:10px;">Confirm appointment</button>
+
+    </form>
+  </div>
+</div>
+
+
+
+<script>
+  $.fn.datetimepicker.Constructor.Default = $.extend({}, $.fn.datetimepicker.Constructor.Default, {
+    icons: {
+      time: 'far fa-clock',
+      date: 'far fa-calendar',
+      up: 'fas fa-arrow-up',
+      down: 'fas fa-arrow-down',
+      previous: 'fas fa-chevron-left',
+      next: 'fas fa-chevron-right',
+      today: 'far fa-calendar-check-o',
+      clear: 'far fa-trash',
+      close: 'far fa-times'
+    } });
+
+  $('#datetimepicker1').datetimepicker({
+    format: 'DD/MM/YYYY h:mm A'
+  });
+</script>
+
+
+<div th:replace="~{fragments/fragments.html :: footer}"></div>
+</body>
+</html>
