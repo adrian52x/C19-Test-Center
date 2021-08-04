@@ -79,6 +79,7 @@ public class ApptExcelExporter {
             createCell(row, columnCount++, appointment.getDate(), style);
 
 
+
         }
     }
 
