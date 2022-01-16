@@ -36,11 +36,12 @@ public class AdminController {
         List<User> userList = iUserService.fetchAllUsers();
         model.addAttribute("iAddressService", iAddressService);
 
-        if(keyword != null){
-            model.addAttribute("myUsers",iUserService.findUserByCpr(keyword));
+        if(keyword == null){
+            model.addAttribute("myUsers", userList);
         }
         else {
-            model.addAttribute("myUsers", userList);
+
+            model.addAttribute("myUsers",iUserService.findUserByCpr(keyword));
         }
         return "admin/User/manageUser";
     }

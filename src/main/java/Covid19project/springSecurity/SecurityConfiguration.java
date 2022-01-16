@@ -82,7 +82,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/showNewUserForm").hasAnyAuthority("ADMIN", "SECRETARY")
                 .antMatchers("/booking").hasAnyAuthority("ADMIN", "SECRETARY", "USER")
                 .antMatchers("/login").permitAll()
-                .antMatchers("/register").permitAll()
+                /*.antMatchers("/register").permitAll()*/
                 .antMatchers("/error").permitAll()
                 .antMatchers("/home/**").hasAnyAuthority("ADMIN", "SECRETARY", "USER")
                 .anyRequest().authenticated()
