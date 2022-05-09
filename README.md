@@ -20,7 +20,7 @@ Features:
 Some screenshots:
 
 * Home page
-* ![home](https://user-images.githubusercontent.com/50320663/167483246-5bbe58c8-35c2-46db-b56b-d0170d4fedca.png)
+![home](https://user-images.githubusercontent.com/50320663/167483246-5bbe58c8-35c2-46db-b56b-d0170d4fedca.png)
 
 * Make appointment
 ![appointment](https://user-images.githubusercontent.com/50320663/167483357-06eac708-6eea-4386-b5a1-91bd4fa3b89f.png)
